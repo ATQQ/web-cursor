@@ -9,12 +9,34 @@
 </head>
 
 <body>
+    <div>
+        <div id="d1" style="background-color: rgb(237, 127, 237);height: 200px;">
+
+        </div>
+        <div id="d2" style="background-color: rgba(154, 211, 255, 0.667);height: 200px;">
+
+        </div>
+        <div id="d3" style="background-color: rgba(88, 247, 186, 0.667);height: 200px;">
+
+        </div>
+        <div id="d4" style="background-color: rgba(236, 251, 80, 0.667);height: 200px;">
+
+        </div>
+    </div>
     <script type="module">
-        import PkG from './src/index.ts'
-        const d = new PkG()
+        import WebCursor from './src/index.ts'
+        const c1 = new WebCursor({
+            els: ['#d1', '#d3'],
+            text: '鼠标'
+        })
+        const c2 = new WebCursor({
+            els: ['#d2', '#d4'],
+            bgUrl: 'https://img.cdn.sugarat.top/mdImg/MTYzMTMyNDYwNTgzMQ==631324605831',
+        })
+
         // setTimeout(() => {
         //     d.destroy()
-        // }, 2000)
+        // }, 5000)
     </script>
 </body>
 
