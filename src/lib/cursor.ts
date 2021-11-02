@@ -15,17 +15,28 @@ class Cursor {
     this.init();
   }
 
-  // TODO，待完善，支持自定义图片和文案内容，样式，dom，残影，预设样式等等
+  // TODO，待完善，dom，残影等等
   private createCursor() {
-    const { text = '', bgUrl, style: cursorStyle } = this.option;
+    const defaultOps = {
+      bgUrl: 'https://img.cdn.sugarat.top/mdImg/MTYzNTg2NTAyNzk0Nw==635865027947',
+      text: '',
+      width: 12,
+      height: 20,
+    };
+    const {
+      text, bgUrl, style: cursorStyle, width, height,
+    } = {
+      ...defaultOps,
+      ...this.option,
+    };
     const dom = h('div');
     dom.textContent = text;
-    if (bgUrl) {
-      dom.style.backgroundImage = `url(${bgUrl})`;
+    if (bgUrl && !text) {
       Object.assign(dom.style, {
-        width: '40px',
-        height: '40px',
-        backgroundSize: '40px 40px',
+        backgroundImage: `url(${bgUrl})`,
+        width: `${width}px`,
+        height: `${height}px`,
+        backgroundSize: `${width}px ${height}px`,
       }, cursorStyle);
     }
 

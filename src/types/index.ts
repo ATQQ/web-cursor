@@ -13,6 +13,14 @@ export module WebCursor{
          */
         bgUrl?:string
         /**
+         * 图片宽度
+         */
+        width?:number
+        /**
+         * 图片高度
+         */
+        height?:number
+        /**
          * 文字内容
          */
         text?:string

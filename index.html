@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
 
 <body>
     <div>
@@ -26,13 +32,18 @@
     <script type="module">
         import WebCursor from './src/index.ts'
         const c1 = new WebCursor({
-            els: ['#d1', '#d3'],
+            els: ['#d1'],
             text: '鼠标',
-            duration: 100
+            duration: 0
         })
         const c2 = new WebCursor({
             els: ['#d2', '#d4'],
             bgUrl: 'https://img.cdn.sugarat.top/mdImg/MTYzMTMyNDYwNTgzMQ==631324605831',
+            width: 30,
+            height: 30
+        })
+        const c3 = new WebCursor({
+            els: '#d3'
         })
 
         // setTimeout(() => {
