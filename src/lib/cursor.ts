@@ -43,18 +43,11 @@ class Cursor {
 
   private elCallback = (e:MouseEvent) => {
     const { duration = 0 } = this.option;
-
-    // TODO:事件冒泡处理
-    e.stopPropagation();
     const { clientX, clientY } = e;
     const targetDom = e.target as HTMLElement;
 
     this.refreshCursor(clientX, clientY);
 
-    targetDom.style.cursor = 'none';
-    if (duration <= 0) {
-      return;
-    }
     let ops = this.domMap.get(targetDom);
     if (!ops) {
       const { cursor } = getComputedStyle(targetDom);
@@ -64,19 +57,24 @@ class Cursor {
       };
       this.domMap.set(targetDom, ops);
     }
+    targetDom.style.cursor = 'none';
+    if (duration <= 0) {
+      return;
+    }
     if (ops.timer) {
       clearTimeout(ops.timer);
     }
 
     ops.timer = setTimeout(() => {
+      // 恢复
       targetDom.style.cursor = ops.cursor;
+      this.refreshCursor(0, 0, false);
     }, duration);
   }
 
   private documentCallback = () => {
     // 选择器外，自动复原
     this.refreshCursor(0, 0, false);
-    console.log('global');
   }
 
   private init() {
@@ -95,7 +93,9 @@ class Cursor {
       });
     });
 
-    document.documentElement.addEventListener('mousemove', this.documentCallback);
+    document.documentElement.addEventListener('mousemove', this.documentCallback, {
+      capture: true,
+    });
   }
 
   /**
