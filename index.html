@@ -45,6 +45,13 @@
         <div id="d3" class="box" style="background-color: rgb(88, 247, 186);"></div>
         <div id="d4" class="box" style="background-color: rgb(236, 251, 80);"></div>
     </div>
+    <div class="box-list">
+        <div id="d5" class="box" style="background-color: rgb(154, 211, 255);"></div>
+        <div id="d6" class="box" style="background-color: rgb(88, 247, 186);"></div>
+        <div id="d7" class="box" style="background-color: rgb(236, 251, 80);"></div>
+        <div id="d8" class="box" style="background-color: rgb(237, 127, 237);">
+        </div>
+    </div>
     <script type="module">
         import WebCursor from './src/index.ts'
         new WebCursor({
@@ -71,7 +78,16 @@
         })
         new WebCursor({
             els: '#d5',
-            show: true
+            html: '<span>自定义HTML<span>'
+        })
+        const dom = document.createElement('div')
+        dom.innerHTML = `
+            <h1>自定义Dom</h1>
+            <p>内容</p>
+        `
+        new WebCursor({
+            els: '#d6',
+            dom
         })
     </script>
 </body>

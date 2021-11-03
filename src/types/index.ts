@@ -13,9 +13,13 @@ export module WebCursor{
          */
         show?:boolean
         /**
-         * TODO：自定义dom
+         * 自定义HTML
          */
-        html?:string|HTMLElement
+        html?:string
+        /**
+         * 自定义Dom
+         */
+        dom?:HTMLElement
         /**
          * 背景图片
          */

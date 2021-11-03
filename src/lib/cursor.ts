@@ -1,6 +1,5 @@
 import { WebCursor } from '../types';
-import { addStyleDom, h } from '../utils';
-import style from '../styles/cursor.scss';
+import { h } from '../utils';
 
 class Cursor {
   private option:WebCursor.options
@@ -15,7 +14,7 @@ class Cursor {
     this.init();
   }
 
-  // TODO，待完善，dom，残影等等
+  // TODO，待完善，残影等等
   private createCursor() {
     const defaultOps = {
       bgUrl: 'https://img.cdn.sugarat.top/mdImg/MTYzNTg2NTAyNzk0Nw==635865027947',
@@ -25,28 +24,43 @@ class Cursor {
       show: false,
     };
     const {
-      text, bgUrl, style: cursorStyle, width, height,
+      text, bgUrl, style, width, height, html, dom,
     } = {
       ...defaultOps,
       ...this.option,
     };
-    const dom = h('div');
-    dom.textContent = text;
+    const { cursorDom } = this;
 
-    Object.assign(dom.style, cursorStyle);
-    if (bgUrl && !text) {
-      Object.assign(dom.style, {
+    // 默认+自定义 样式
+    Object.assign(cursorDom.style, {
+      position: 'fixed',
+      color: '#000',
+      pointerEvents: ' none',
+      display: 'none',
+    }, style);
+    document.body.appendChild(cursorDom);
+
+    if (typeof html === 'string') {
+      cursorDom.innerHTML = html;
+      return;
+    }
+
+    // 简单判断是个dom元素
+    if (dom?.tagName && dom?.children !== undefined) {
+      cursorDom.appendChild(dom);
+      return;
+    }
+    // 设置文案与设置图片互斥
+    if (text) {
+      cursorDom.textContent = text;
+    } else if (bgUrl) {
+      Object.assign(cursorDom.style, {
         backgroundImage: `url(${bgUrl})`,
         width: `${width}px`,
         height: `${height}px`,
         backgroundSize: `${width}px ${height}px`,
       });
     }
-
-    dom.classList.add('cursor-wrapper');
-    addStyleDom(dom, style);
-    document.body.appendChild(dom);
-    this.cursorDom = dom;
   }
 
   private refreshCursor(x, y, show = true) {
