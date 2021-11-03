@@ -22,6 +22,7 @@ class Cursor {
       text: '',
       width: 12,
       height: 20,
+      show: false,
     };
     const {
       text, bgUrl, style: cursorStyle, width, height,
@@ -47,13 +48,15 @@ class Cursor {
   }
 
   private refreshCursor(x, y, show = true) {
-    this.cursorDom.style.left = `${x}px`;
-    this.cursorDom.style.top = `${y}px`;
     this.cursorDom.style.display = show ? 'block' : 'none';
+    if (show) {
+      this.cursorDom.style.left = `${x}px`;
+      this.cursorDom.style.top = `${y}px`;
+    }
   }
 
   private elCallback = (e:MouseEvent) => {
-    const { duration = 0 } = this.option;
+    const { duration = 0, show } = this.option;
     const { clientX, clientY } = e;
     const targetDom = e.target as HTMLElement;
 
@@ -68,7 +71,9 @@ class Cursor {
       };
       this.domMap.set(targetDom, ops);
     }
-    targetDom.style.cursor = 'none';
+    if (!show) {
+      targetDom.style.cursor = 'none';
+    }
     if (duration <= 0) {
       return;
     }
@@ -78,7 +83,9 @@ class Cursor {
 
     ops.timer = setTimeout(() => {
       // 恢复
-      targetDom.style.cursor = ops.cursor;
+      if (targetDom.style.cursor !== ops.cursor) {
+        targetDom.style.cursor = ops.cursor;
+      }
       this.refreshCursor(0, 0, false);
     }, duration);
   }

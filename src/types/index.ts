@@ -5,9 +5,17 @@ export module WebCursor{
          */
         els?:string[]|string
         /**
-         * 持续时间
+         * 自定义光标维持时间，xms后未操作自动复原
          */
         duration?:number
+        /**
+         * 一直都展示原光标
+         */
+        show?:boolean
+        /**
+         * TODO：自定义dom
+         */
+        html?:string|HTMLElement
         /**
          * 背景图片
          */

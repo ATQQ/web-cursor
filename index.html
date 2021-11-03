@@ -12,29 +12,30 @@
         margin: 0;
         padding: 0;
     }
+
+    .box-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .box {
+        width: 200px;
+        height: 200px;
+    }
 </style>
 
 <body>
-    <div>
-        <div id="d1" style="background-color: rgb(237, 127, 237);height: 200px;">
-
-        </div>
-        <div id="d2" style="background-color: rgba(154, 211, 255, 0.667);height: 200px;">
-
-        </div>
-        <div id="d3" style="background-color: rgba(88, 247, 186, 0.667);height: 200px;">
-
-        </div>
-        <div id="d4" style="background-color: rgba(236, 251, 80, 0.667);height: 200px;">
-
-        </div>
+    <div class="box-list">
+        <div id="d1" class="box" style="background-color: rgb(237, 127, 237);"></div>
+        <div id="d2" class="box" style="background-color: rgb(154, 211, 255);"></div>
+        <div id="d3" class="box" style="background-color: rgb(88, 247, 186);"></div>
+        <div id="d4" class="box" style="background-color: rgb(236, 251, 80);"></div>
     </div>
     <script type="module">
         import WebCursor from './src/index.ts'
         const c1 = new WebCursor({
-            els: ['#d1'],
+            els: '#d1',
             text: '鼠标',
-            duration: 0
         })
         const c2 = new WebCursor({
             els: ['#d2', '#d4'],
@@ -45,10 +46,10 @@
         const c3 = new WebCursor({
             els: '#d3'
         })
-
-        // setTimeout(() => {
-        //     d.destroy()
-        // }, 5000)
+        const c4 = new WebCursor({
+            els: '#d5',
+            show: true
+        })
     </script>
 </body>
 
