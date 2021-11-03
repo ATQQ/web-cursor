@@ -1,7 +1,7 @@
 {
-  "name": "tpl-web-lib",
-  "version": "0.0.3",
-  "description": "web library template",
+  "name": "web-cursor",
+  "version": "0.0.0",
+  "description": "rewrite web element cursor",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
