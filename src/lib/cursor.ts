@@ -32,13 +32,15 @@ class Cursor {
     };
     const dom = h('div');
     dom.textContent = text;
+
+    Object.assign(dom.style, cursorStyle);
     if (bgUrl && !text) {
       Object.assign(dom.style, {
         backgroundImage: `url(${bgUrl})`,
         width: `${width}px`,
         height: `${height}px`,
         backgroundSize: `${width}px ${height}px`,
-      }, cursorStyle);
+      });
     }
 
     dom.classList.add('cursor-wrapper');
@@ -58,6 +60,10 @@ class Cursor {
   private elCallback = (e:MouseEvent) => {
     const { duration = 0, show } = this.option;
     const { clientX, clientY } = e;
+
+    // 防止叠加的元素出现多个鼠标样式
+    e.stopPropagation();
+
     const targetDom = e.target as HTMLElement;
 
     this.refreshCursor(clientX, clientY);

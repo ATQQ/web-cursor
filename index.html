@@ -19,34 +19,57 @@
     }
 
     .box {
-        width: 200px;
+        flex: 1;
         height: 200px;
+    }
+
+    a {
+        text-align: center;
+        display: inline-block;
+        padding: 6px 16px;
+        text-decoration: none;
+        background-color: wheat;
+        margin: 10px;
+        border-radius: 4px;
+        color: black;
     }
 </style>
 
 <body>
     <div class="box-list">
-        <div id="d1" class="box" style="background-color: rgb(237, 127, 237);"></div>
+        <div id="d1" class="box" style="background-color: rgb(237, 127, 237);">
+            <a href="">链接1</a>
+            <a href="">链接2</a>
+        </div>
         <div id="d2" class="box" style="background-color: rgb(154, 211, 255);"></div>
         <div id="d3" class="box" style="background-color: rgb(88, 247, 186);"></div>
         <div id="d4" class="box" style="background-color: rgb(236, 251, 80);"></div>
     </div>
     <script type="module">
         import WebCursor from './src/index.ts'
-        const c1 = new WebCursor({
+        new WebCursor({
+            els: 'a',
+            text: 'a标签',
+            show: true,
+            style: {
+                color: 'green',
+                transform: 'translate(10px, 10px)',
+            }
+        })
+        new WebCursor({
             els: '#d1',
             text: '鼠标',
         })
-        const c2 = new WebCursor({
+        new WebCursor({
             els: ['#d2', '#d4'],
             bgUrl: 'https://img.cdn.sugarat.top/mdImg/MTYzMTMyNDYwNTgzMQ==631324605831',
             width: 30,
             height: 30
         })
-        const c3 = new WebCursor({
+        new WebCursor({
             els: '#d3'
         })
-        const c4 = new WebCursor({
+        new WebCursor({
             els: '#d5',
             show: true
         })
